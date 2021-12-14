@@ -78,8 +78,6 @@ class Day8Solver : DaySolver<List<String>, Int> {
                 continue
             }
         }
-        println(newCombinations)
-        println(output)
         return output.map { x ->
             x.map { y -> newCombinations[y.toString()]!!.first() }
                 .joinToString("")

@@ -12,7 +12,7 @@ class Day5Solver : DaySolver<List<String>, Int> {
     private fun initialiseGrid(data: List<List<Int>>): List<MutableList<Int>> {
         val maxX = data.maxOf { line -> maxOf(line[0],line[2]) }
         val maxY = data.maxOf { line -> maxOf(line[1],line[3]) }
-        return (0..maxX).map { (0..maxY).map { x -> 0 }.toMutableList() }
+        return (0..maxX).map { (0..maxY).map { 0 }.toMutableList() }
     }
 
     override fun part1(data: List<String>): Int {
