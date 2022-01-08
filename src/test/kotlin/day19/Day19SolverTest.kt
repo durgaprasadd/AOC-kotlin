@@ -1,34 +1,34 @@
-package day9
+package day19
 
 import helpers.readDataAsList
 import io.kotlintest.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class Day9SolverTest {
-    private val daySolver = Day9Solver()
-    private val dir = "day9"
+internal class Day19SolverTest {
+    private val daySolver = Day19Solver()
+    private val dir = "day19"
 
     @Test
     fun `should return correct result for sample data for part1`() {
         val data = readDataAsList(dir, "sample")
-        daySolver.part1(data) shouldBe 15
+        daySolver.part1(data) shouldBe 4140
     }
 
     @Test
     fun `should return correct result for original data for part1`() {
         val data = readDataAsList(dir, "original")
-        daySolver.part1(data) shouldBe 560
+        daySolver.part1(data) shouldBe 3665
     }
 
     @Test
     fun `should return correct result for sample data for part2`() {
         val data = readDataAsList(dir, "sample")
-        daySolver.part2(data) shouldBe 1134
+        daySolver.part2(data) shouldBe 3993
     }
 
     @Test
     fun `should return correct result for original data for part2`() {
         val data = readDataAsList(dir, "original")
-        daySolver.part2(data) shouldBe 959136
+        daySolver.part2(data) shouldBe 4775
     }
 }

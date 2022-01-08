@@ -1,6 +1,7 @@
 package day15
 
 import model.DaySolver
+import java.util.*
 
 class Day15Solver : DaySolver<List<String>, Int> {
 
@@ -64,6 +65,34 @@ class Day15Solver : DaySolver<List<String>, Int> {
                 checkAllPaths(parseData, updated, Pair(x,y))
             }
         }
+    }
+
+    private fun findLowestPathUsingAlgo(data: List<List<Int>>): Int {
+        val visited = mutableSetOf<Pair<Int,Int>>()
+        val priorityQueue = PriorityQueue<Triple<Int,Int,Int>>(compareBy { it.first })
+        priorityQueue.add(Triple(0,0,0))
+        while (priorityQueue.isNotEmpty()) {
+            val point = priorityQueue.poll()
+            val (risk, x1,y1) = point
+            visited.add(Pair(x1,y1))
+            listOf(
+                Pair(0,1),
+                Pair(0,-1),
+                Pair(1,0),
+                Pair(-1,0),
+            ).map {(x,y) ->
+                Pair(x+x1, y+y1)
+            }.filter { (x,y) ->
+                x >=0 && y >= 0 && x < data.size && y < data.first().size && !visited.contains(Pair(x,y))
+            }.forEach { pair ->
+                val (x,y) = pair
+                if (x == data.size - 1&& y == data.first().size - 1){
+                    return risk + data[x][y]
+                }
+                priorityQueue.add(Triple(risk + data[x][y], x,y))
+            }
+        }
+        return 0
     }
 
     override fun part2(data: List<String>): Int {
