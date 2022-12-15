@@ -24,63 +24,8 @@ class Day40Solver : DaySolver<List<String>, Long> {
         }
     }
 
-//    override fun part1(data: List<String>): Int {
-//        val input = parse(data)
-//        var minX = -100
-//        var maxX = 100
-//        var minY = -100
-//        var maxY = 100
-////        for ((s,b) in input){
-////            minX = minOf(s.first, b.first, minX)
-////            minY = minOf(s.second, b.second, minY)
-////            maxX = maxOf(s.first, b.first, maxX)
-////            maxY = maxOf(s.second, b.second, maxY)
-////        }
-//        val grid = Array(maxY-minY+1){
-//            IntArray(maxX-minX+1){
-//                0
-//            }
-//        }
-//        for ((s,b) in input){
-//           grid[s.second - minY][s.first - minX] = 1
-//           grid[b.second - minY][b.first - minX] = 2
-//        }
-//
-//        for ((s,b)  in input){
-//            val x = s.first - minX
-//            val y = s.second - minY
-//            val x1 = b.first - minX
-//            val y1 = b.second - minY
-//            val diff = abs(x-x1) + abs(y-y1)
-//            var start = 0
-//            for (i in y-diff..y){
-//                for (j in x-start..x+start){
-//                    if (grid[i][j] == 0){
-//                        grid[i][j] = -1
-//                    }
-//                }
-//                start++
-//            }
-//
-//            start = diff
-//            for (i in y..y+diff){
-//                for (j in x-start..x+start){
-//                    if (grid[i][j] == 0){
-//                        grid[i][j] = -1
-//                    }
-//                }
-//                start--
-//            }
-//        }
-//
-//        println(grid[10-minY].toList().filter { it == -1 }.size)
-//
-//        return 0
-//    }
-
     override fun part1(data: List<String>): Long {
         val input = parse(data)
-//        val y = 10
         val result = mutableListOf<LongRange>()
         for ((s, b) in input) {
             val distance = abs(s.first - b.first) + abs(s.second - b.second)
@@ -106,7 +51,6 @@ class Day40Solver : DaySolver<List<String>, Long> {
             res = res1
         }
         val ans = res.first()
-        println(ans.last - ans.first)
         return ans.last - ans.first
     }
 
@@ -144,8 +88,6 @@ class Day40Solver : DaySolver<List<String>, Long> {
 
         val x = (pos + neg)/2
         val y = (neg-pos)/2
-        println(x)
-        println(y)
         return (x * 4000000) + y
     }
 
