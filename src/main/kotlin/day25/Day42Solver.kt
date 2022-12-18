@@ -2,7 +2,9 @@ package day25
 
 import model.DaySolver
 
-typealias Cell = Pair<Int,Int>
+typealias Cell = Pair<Int, Int>
+typealias Integer = MutableValue<Int>
+
 class Day42Solver : DaySolver<String, Long> {
     private val points = listOf(
         listOf((0 to 0), (1 to 0), (2 to 0), (3 to 0)),
@@ -13,44 +15,40 @@ class Day42Solver : DaySolver<String, Long> {
     )
 
     override fun part1(data: String): Long {
-        return solve(2022, points, data)
+        return solve(2022, data)
     }
 
     override fun part2(data: String): Long {
-        return solve(1000000000000L, points, data)
+        return solve(1000000000000L, data)
     }
 
-    private fun solve(n: Long, points: List<List<Cell>>, data: String): Long {
+    private fun solve(n: Long, data: String): Long {
         var count = n
         val cells = mutableSetOf<Cell>()
         val cycles = mutableMapOf<Triple<Int, Int, List<Cell>>, Pair<Int, Long>>()
-        var jet = 0
-        var height = 0
-        var piece = 0
+        val jet = Integer(0)
+        val height = Integer(0)
+        val piece = Integer(0)
         var additional = 0L
         while (count > 0) {
-            val (currJet, currPiece, currHeight) = place(cells, jet, piece, height, points, data)
-            jet = currJet
-            piece = currPiece
-            height = currHeight
+            place(cells, jet, piece, height, data)
             count--
-            val ground = groundShape(cells, height) ?: continue
-            if (Triple(jet, piece, ground) in cycles) {
-                val (oldmaxy, oldcount) = cycles[Triple(jet, piece, ground)]!!
-                val dcount = oldcount - count
-                val dmaxy = height - oldmaxy
-                if (dcount < count) {
-                    additional += dmaxy * (count / dcount)
-                    count %= dcount
+            val ground = groundShape(cells, height.value) ?: continue
+            if (Triple(jet.value, piece.value, ground) in cycles) {
+                val (oldHeight, oldCount) = cycles[Triple(jet.value, piece.value, ground)]!!
+                val deltaCount = oldCount - count
+                val deltaHeight = height.value - oldHeight
+                if (deltaCount < count) {
+                    additional += deltaHeight * (count / deltaCount)
+                    count %= deltaCount
                 }
             }
-
-            cycles[Triple(jet, piece, ground)] = (height to count)
+            cycles[Triple(jet.value, piece.value, ground)] = (height.value to count)
         }
-        return additional + height
+        return additional + height.value
     }
 
-    private fun groundShape(cells: MutableSet<Cell>, height: Int): List<Cell>? {
+    private fun groundShape(cells: Set<Cell>, height: Int): List<Cell>? {
         fun dfs(x: Int, y: Int, visited: MutableSet<Cell>) {
             if (!free(cells, x, y + height) || (x to y) in visited || visited.size > 20) return
             visited.add(x to y)
@@ -66,44 +64,33 @@ class Day42Solver : DaySolver<String, Long> {
         return if (state.size < 20) state.toList() else null
     }
 
-    private fun canMove(
-        cells: MutableSet<Cell>,
-        piece: Int,
-        x: Int,
-        y: Int,
-        points: List<List<Cell>>
-    ): Boolean {
+    private fun canMove(cells: Set<Cell>, piece: Int, x: Int, y: Int): Boolean {
         return points[piece].all { (dx, dy) ->
             free(cells, x + dx, y + dy)
         }
     }
 
-    private fun free(t: MutableSet<Cell>, x: Int, y: Int): Boolean {
-        return x in 0..6 && y > 0 && (x to y) !in t
+    private fun free(cells: Set<Cell>, x: Int, y: Int): Boolean {
+        return x in 0..6 && y > 0 && (x to y) !in cells
     }
 
-    private fun place(
-        cells: MutableSet<Cell>,
-        jet: Int,
-        piece: Int,
-        height: Int,
-        points: List<List<Cell>>,
-        data: String
-    ): Triple<Int, Int, Int> {
+    private fun place(cells: MutableSet<Cell>, jet: Integer, piece: Integer, height: Integer, data: String) {
         var x = 2
-        var y = height + 5
-        var currJet = jet
-        while (canMove(cells, piece, x, y - 1, points)) {
+        var y = height.value + 5
+        while (canMove(cells, piece.value, x, y - 1)) {
             y--
-            if (data[currJet] == '<' && canMove(cells, piece, x - 1, y, points)) x -= 1
-            if (data[currJet] == '>' && canMove(cells, piece, x + 1, y, points)) x += 1
-            currJet = (currJet + 1) % data.length
+            if (data[jet.value] == '<' && canMove(cells, piece.value, x - 1, y)) x -= 1
+            if (data[jet.value] == '>' && canMove(cells, piece.value, x + 1, y)) x += 1
+            jet.value = (jet.value + 1) % data.length
         }
-        val newCells = points[piece].map { (dx, dy) ->
+        val newCells = points[piece.value].map { (dx, dy) ->
             x + dx to y + dy
         }
         cells.addAll(newCells)
-        return Triple(currJet, (piece + 1) % points.size, maxOf(height, newCells.maxOf { it.second }))
+        height.value = maxOf(height.value, newCells.maxOf { it.second })
+        piece.value = (piece.value + 1) % points.size
     }
 
 }
+
+data class MutableValue<T>(var value: T)
