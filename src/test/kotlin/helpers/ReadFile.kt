@@ -16,3 +16,7 @@ fun readData(dir: String, fileName: String): String {
 fun readDataAsIntList(dir: String, fileName: String): List<Int> {
     return readDataAsList(dir, fileName).map { it.toInt() }
 }
+
+fun readDataAsLongList(dir: String, fileName: String): List<Long> {
+    return readDataAsList(dir, fileName).map { it.trim().toLong() }
+}

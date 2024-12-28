@@ -1,0 +1,16 @@
+fileignoreconfig:
+- filename: src/main/kotlin/year2024/Day16Solver.kt
+  checksum: e4e0366c18fa6fa78bfe7dc42fe4ea4daaaac4c38f1b5e0a166d118eeaf62918
+- filename: src/main/kotlin/year2024/Day22Solver.kt
+  checksum: a999984e6e6baadbc54f98813c3c1e2227ff8015c6e41b8786f28e7edeeb0774
+- filename: src/main/kotlin/year2024/Day23Solver.kt
+  checksum: 560e577eec1873029fe2f2e96eb1675ce306809288578776f6d637f80ef679cc
+- filename: src/main/kotlin/year2024/Day24Solver.kt
+  checksum: 9d3dac761bf0abcccbb2a76e92fc4f3d89a6f737afc2835f546bb0b7b6a4500b
+- filename: src/main/kotlin/year2024/Day25Solver.kt
+  checksum: 403f233e2264c6b2db1f97c5f7671fbbb07d054a50079038a6ece0dbc2245d1a
+- filename: src/test/resources/year2024/day10/original
+  checksum: 551e6e6237aea30b47526643d468776c9174f9d7afad433d9f9fc498ead84cbe
+- filename: src/test/resources/year2024/day9/original
+  checksum: c2bf99a1d2b8cb5e58c5865725b59d0b7c714e9ac7e4e6646bf53ab014207c05
+version: "1.0"
