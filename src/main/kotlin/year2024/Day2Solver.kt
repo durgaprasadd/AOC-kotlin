@@ -9,7 +9,6 @@ class Day2Solver: DaySolver<List<String>, Int> {
         var count = 0
         for (line in lines){
             if(increasing(line) && safeIncrease(line)){
-                println(line)
                 count++
                 continue
             }
@@ -62,7 +61,6 @@ class Day2Solver: DaySolver<List<String>, Int> {
         var count = 0
         for (line in lines){
             if(increasing(line) && safeIncrease(line)){
-                println(line)
                 count++
                 continue
             }

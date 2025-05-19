@@ -43,8 +43,6 @@ class Day14Solver : DaySolver<List<String>, Long> {
             }
         }
 
-        println(res.toList())
-        println(d)
         var count = 0L
         count += (res[0] * res[1] * res[2] * res[3])
         return count

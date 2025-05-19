@@ -26,7 +26,6 @@ class Day3Solver: DaySolver<List<String>, Int> {
             val (f,s) = i.split(",")
             sum += f.replace("mul(","").toInt() * s.replace(")","").toInt()
         }
-        println(result)
         return sum
     }
 
@@ -59,7 +58,6 @@ class Day3Solver: DaySolver<List<String>, Int> {
                     val curr = it.substring(i, i + j)
                     if (curr in set) {
                         result.add(curr)
-                        println(curr)
                     }
                 }
             }

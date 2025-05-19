@@ -42,7 +42,6 @@ class Day13Solver : DaySolver<List<String>, Long> {
             if (j > 100) continue
             if (cx + j * b.first != t.first || cy + j * b.second != t.second) continue
             val curr = (i * 3) + j
-            println("i $i j $j")
             res = minOf(curr, res)
         }
         return if (res == Int.MAX_VALUE) -1 else res

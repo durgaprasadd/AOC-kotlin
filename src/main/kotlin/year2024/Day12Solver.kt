@@ -94,7 +94,6 @@ class Day12Solver : DaySolver<List<String>, Long> {
                 if (bottom(data, i, j)) c++
                 if (left(data, i, j)) c++
                 if (right(data, i, j)) c++
-                if (data[i][j] == 'C') println(c)
                 d[i][j] = c
             }
         }

@@ -11,13 +11,13 @@ internal class Day14SolverTest {
     @Test
     fun `should return correct result for sample data for part1`() {
         val data = readDataAsList(dir, "sample")
-        daySolver.part1(data) shouldBe 480L
+        daySolver.part1(data) shouldBe 21L
     }
 
     @Test
     fun `should return correct result for original data for part1`() {
         val data = readDataAsList(dir, "original")
-        daySolver.part1(data) shouldBe 26810L //26400L
+        daySolver.part1(data) shouldBe 221616000L //26400L
     }
 
     @Test

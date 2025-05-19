@@ -29,6 +29,6 @@ internal class Day9SolverTest {
     @Test
     fun `should return correct result for original data for part2`() {
         val data = readData(dir, "original")
-        daySolver.part2(data) shouldBe 20928985450275L
+        daySolver.part2(data) shouldBe 6304576012713L
     }
 }
